@@ -1,5 +1,6 @@
 package cgg.a03;
 
+import cgg.a04.Shape;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
@@ -7,13 +8,13 @@ import cgtools.Point;
 import static cgtools.Vector.*;
 import static cgtools.Vector.subtract;
 
-public class Sphere {
+public class Sphere implements Shape {
 
     private Point center;
-    private int radius;
+    private double radius;
     private Color color;
 
-    public Sphere(Point center, int radius, Color color) {
+    public Sphere(Point center, double radius, Color color) {
         this.center = center;
         this.radius = radius;
         this.color = color;

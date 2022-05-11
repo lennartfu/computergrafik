@@ -26,6 +26,6 @@ public class Camera {
         double zdir = -(halfWidth / Math.tan(angle / 2));
         Direction normal = normalize(direction(xdir, ydir, zdir));
 
-        return new Ray(point(0, 0, 0), normal, 0, Integer.MAX_VALUE);
+        return new Ray(point(0, 0, 0), normal, 0, Double.POSITIVE_INFINITY);
     }
 }
