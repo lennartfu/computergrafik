@@ -3,6 +3,7 @@ package tests.a03;
 import cgg.a03.Hit;
 import cgg.a03.Ray;
 import cgg.a03.Sphere;
+import cgg.a05.DiffuseMaterial;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
@@ -23,7 +24,7 @@ public class SphereTest {
         double tmin = 0;
         double tmax = Double.POSITIVE_INFINITY;
 
-        Sphere sphere = new Sphere(center, radius, new Color(0, 0, 0));
+        Sphere sphere = new Sphere(center, radius, new DiffuseMaterial(new Color(0, 0, 0)));
         Hit hit = sphere.intersect(new Ray(source, direction, tmin, tmax));
 
         assert hit.position().equals(point(0, 0, -1));
@@ -40,7 +41,7 @@ public class SphereTest {
         double tmin = 0;
         double tmax = Double.POSITIVE_INFINITY;
 
-        Sphere sphere = new Sphere(center, radius, new Color(0, 0, 0));
+        Sphere sphere = new Sphere(center, radius, new DiffuseMaterial(new Color(0, 0, 0)));
         Hit hit = sphere.intersect(new Ray(source, direction, tmin, tmax));
 
         assert hit == null;
@@ -56,7 +57,7 @@ public class SphereTest {
         double tmin = 0;
         double tmax = Double.POSITIVE_INFINITY;
 
-        Sphere sphere = new Sphere(center, radius, new Color(0, 0, 0));
+        Sphere sphere = new Sphere(center, radius, new DiffuseMaterial(new Color(0, 0, 0)));
         Hit hit = sphere.intersect(new Ray(source, direction, tmin, tmax));
 
         assert hit.position().equals(point(0, 0, -2));
@@ -73,7 +74,7 @@ public class SphereTest {
         double tmin = 0;
         double tmax = Double.POSITIVE_INFINITY;
 
-        Sphere sphere = new Sphere(center, radius, new Color(0, 0, 0));
+        Sphere sphere = new Sphere(center, radius, new DiffuseMaterial(new Color(0, 0, 0)));
         Hit hit = sphere.intersect(new Ray(source, direction, tmin, tmax));
 
         assert hit == null;
@@ -89,7 +90,7 @@ public class SphereTest {
         double tmin = 0;
         double tmax = 2;
 
-        Sphere sphere = new Sphere(center, radius, new Color(0, 0, 0));
+        Sphere sphere = new Sphere(center, radius, new DiffuseMaterial(new Color(0, 0, 0)));
         Hit hit = sphere.intersect(new Ray(source, direction, tmin, tmax));
 
         assert hit == null;

@@ -2,13 +2,13 @@ package cgg.a04;
 
 import cgg.a03.Hit;
 import cgg.a03.Ray;
-import cgtools.Color;
+import cgg.a05.Material;
 import cgtools.Direction;
 import cgtools.Point;
 
 import static cgtools.Vector.*;
 
-public record Plane(Point anchor, Direction normal, double radius, Color color) implements Shape {
+public record Plane(Point anchor, Direction normal, double radius, Material material) implements Shape {
 
     @Override
     public Hit intersect(Ray ray) {
@@ -24,6 +24,6 @@ public record Plane(Point anchor, Direction normal, double radius, Color color) 
         if (length(subtract(hit, anchor)) > radius) {
             return null;
         }
-        return new Hit(t, hit, normal, color);
+        return new Hit(t, hit, normal, material);
     }
 }

@@ -2,12 +2,12 @@ package cgg.a04;
 
 import cgg.a03.Hit;
 import cgg.a03.Ray;
-import cgtools.Color;
+import cgg.a05.Material;
 import cgtools.Point;
 
 import static cgtools.Vector.*;
 
-public record Background(Color color) implements Shape {
+public record Background(Material material) implements Shape {
 
     @Override
     public Hit intersect(Ray ray) {
@@ -15,6 +15,6 @@ public record Background(Color color) implements Shape {
             return null;
         }
         Point hit = add(ray.source, multiply(ray.tmax, ray.direction));
-        return new Hit(ray.tmax, hit, ray.direction, color);
+        return new Hit(ray.tmax, hit, ray.direction, material);
     }
 }

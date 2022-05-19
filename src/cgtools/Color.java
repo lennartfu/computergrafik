@@ -27,4 +27,12 @@ public record Color(double r, double g, double b) {
     result = prime * result + Double.valueOf(b).hashCode();
     return result;
   }
+
+  public static Color add(Color a, Color b) {
+    return new Color(a.r() + b.r(), a.g() + b.g(), a.b() + b.b());
+  }
+
+  public static Color multiply(Color a, Color b) {
+    return new Color(a.r() * b.r(), a.g() * b.g(), a.b() * b.b());
+  }
 }
