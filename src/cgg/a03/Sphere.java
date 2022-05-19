@@ -1,24 +1,14 @@
 package cgg.a03;
 
 import cgg.a04.Shape;
-import cgtools.Color;
+import cgg.a05.Material;
 import cgtools.Direction;
 import cgtools.Point;
 
 import static cgtools.Vector.*;
 import static cgtools.Vector.subtract;
 
-public class Sphere implements Shape {
-
-    private Point center;
-    private double radius;
-    private Color color;
-
-    public Sphere(Point center, double radius, Color color) {
-        this.center = center;
-        this.radius = radius;
-        this.color = color;
-    }
+public record Sphere(Point center, double radius, Material material) implements Shape {
 
     /**
      * Checks if a given ray intersects the sphere. If it does, returns a hit object with the intersection.
@@ -53,6 +43,6 @@ public class Sphere implements Shape {
         // Generate a hit object
         Point hit = add(r.source, multiply(t, r.direction));
         Direction normal = divide(subtract(hit, center), radius);
-        return new Hit(t, hit, normal, color);
+        return new Hit(t, hit, normal, material);
     }
 }
