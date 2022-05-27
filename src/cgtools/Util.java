@@ -1,6 +1,9 @@
 /** @author henrik.tramberend@beuth-hochschule.de */
 package cgtools;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static cgtools.Vector.*;
 import static java.lang.Math.*;
 
@@ -23,5 +26,13 @@ public final class Util {
     Color ambient = multiply(0.1, color);
     Color diffuse = multiply(0.9 * Math.max(0, dotProduct(lightDir, normal)), color);
     return add(ambient, diffuse);
+  }
+
+  public static double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    BigDecimal bd = BigDecimal.valueOf(value);
+    bd = bd.setScale(places, RoundingMode.HALF_UP);
+    return bd.doubleValue();
   }
 }

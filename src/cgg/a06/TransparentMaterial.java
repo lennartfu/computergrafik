@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static cgtools.Random.random;
+import static cgtools.Util.round;
 import static cgtools.Vector.*;
 
 public class TransparentMaterial implements Material {
@@ -73,13 +74,5 @@ public class TransparentMaterial implements Material {
         double product = dotProduct(n, d);
         double schlick = r0 + (1 - r0) * Math.pow(1 + product, 5);
         return schlick;
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
     }
 }
