@@ -1,6 +1,7 @@
 package cgg.a03;
 
 import cgtools.Direction;
+import cgtools.Matrix;
 import cgtools.Point;
 
 import static cgtools.Vector.*;
@@ -17,6 +18,12 @@ public class Ray {
         this.direction = direction;
         this.tmin = tmin;
         this.tmax = tmax;
+    }
+
+    public Ray transform(Matrix m) {
+        Point source = Matrix.multiply(m, this.source);
+        Direction direction = Matrix.multiply(m, this.direction);
+        return new Ray(source, direction, this.tmin, this.tmax);
     }
 
     public Point pointAt(double t) {
