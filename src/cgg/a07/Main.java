@@ -23,28 +23,24 @@ import static cgtools.Vector.point;
 
 public class Main {
 
-    private static final Camera camera = new Camera(Math.PI / 3, 1280, 720);
+    private static final List<Shape> shapes = new ArrayList<>();
 
-    private static final Shape background = new Background(background(0, 0, 0));
+    private static final Shape background = new Background(background(1, 0.3, 0.3));
     private static final Shape ground = new Plane(point(0.0, -0.5, 0.0), direction(0, 1, 0),
-            Double.POSITIVE_INFINITY, new ReflectiveMaterial(new Color(0.3, 0.3, 0.3), 0));
+            Double.POSITIVE_INFINITY, new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), 0));
 
     public static void main(String[] args) {
-        createImage1();
-        createImage2();
-    }
-
-    private static void createImage1() {
         Matrix identity = Matrix.identity();
-        List<Shape> shapes = new ArrayList<>();
+        Matrix translation = Matrix.translation(0, 10, 50);
+        Matrix rotation = Matrix.rotation(1, 0, 0, -10);
+        Matrix transformation = Matrix.multiply(translation, rotation);
 
         shapes.add(ground);
         shapes.add(background);
-
         int z = 40;
         for (int i = 0; i < 50; i++) {
-            shapes.add(new Cylinder(point(5, -0.5, z), 0.5, 2, background(1, 0.1, 1)));
-            shapes.add(new Cylinder(point(-5, -0.5, z), 0.5, 2, background(1, 0.1, 1)));
+            shapes.add(new Cylinder(point(5, -0.475, z), 0.5, 2, background(1, 0.1, 1)));
+            shapes.add(new Cylinder(point(-5, -0.475, z), 0.5, 2, background(1, 0.1, 1)));
             shapes.add(new Cylinder(point(5, -0.5, z), 0.55, 2.05, transparent(0.3, 0.3, 0.3)));
             shapes.add(new Cylinder(point(-5, -0.5, z), 0.55, 2.05, transparent(0.3, 0.3, 0.3)));
             z -= 10;
@@ -52,27 +48,6 @@ public class Main {
 
         Group scene = new Group(shapes);
         createImage(identity, scene, "a07-1.png");
-    }
-
-    private static void createImage2() {
-        Matrix translation = Matrix.translation(0, 10, 50);
-        Matrix rotation = Matrix.rotation(1, 0, 0, -10);
-        Matrix transformation = Matrix.multiply(translation, rotation);
-        List<Shape> shapes = new ArrayList<>();
-
-        shapes.add(ground);
-        shapes.add(background);
-
-        int z = 40;
-        for (int i = 0; i < 50; i++) {
-            shapes.add(new Cylinder(point(5, -0.5, z), 0.5, 2, background(1, 0.1, 1)));
-            shapes.add(new Cylinder(point(-5, -0.5, z), 0.5, 2, background(1, 0.1, 1)));
-            shapes.add(new Cylinder(point(5, -0.5, z), 0.55, 2.05, transparent(0.3, 0.3, 0.3)));
-            shapes.add(new Cylinder(point(-5, -0.5, z), 0.55, 2.05, transparent(0.3, 0.3, 0.3)));
-            z -= 10;
-        }
-
-        Group scene = new Group(shapes);
         createImage(transformation, scene, "a07-2.png");
     }
 

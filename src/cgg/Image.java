@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Image {
 
-  private final int samplePoints = 20;
+  private final int samplePoints = 100;
 
   private final int components = 3;
   private int width;
@@ -61,8 +61,8 @@ public class Image {
         this.setPixel(x, y, color);
       }
       if (x % (width / 20) == 0) {
-        i += 5;
         System.out.print(i + "%... ");
+        i += 5;
       }
     }
   }
