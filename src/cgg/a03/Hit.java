@@ -2,6 +2,7 @@ package cgg.a03;
 
 import cgg.a05.Material;
 import cgtools.Direction;
+import cgtools.Matrix;
 import cgtools.Point;
 
 public record Hit(double t, Point position, Direction normal, Material material) {
@@ -18,5 +19,11 @@ public record Hit(double t, Point position, Direction normal, Material material)
             }
         }
         return min;
+    }
+
+    public Hit transform(Matrix m) {
+        Point position = Matrix.multiply(m, this.position);
+        Direction normal = Matrix.multiply(m, this.normal);
+        return new Hit(this.t, position, normal, this.material);
     }
 }

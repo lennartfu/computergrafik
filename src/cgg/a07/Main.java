@@ -51,7 +51,7 @@ public class Main {
         createImage(transformation, scene, "a07-2.png");
     }
 
-    private static void createImage(Matrix matrix, Group scene, String filename) {
+    public static void createImage(Matrix matrix, Group scene, String filename) {
         System.out.println("Creating image '" + filename + "'...");
         Image image = new Image(1280, 720);
         Camera camera = new Camera(Math.PI / 3, 1280, 720, matrix);
@@ -61,7 +61,7 @@ public class Main {
         System.out.println("Done.");
     }
 
-    private static Sphere sphere(Matrix matrix, double x, double y, double radius, Material material) {
+    public static Sphere sphere(Matrix matrix, double x, double y, double radius, Material material) {
         Camera cam = new Camera(Math.PI / 3, 1280, 720, matrix);
         Ray ray = cam.generateRay(x, y);
         Hit hit = ground.intersect(ray);
@@ -76,19 +76,19 @@ public class Main {
         return new Cylinder(hit.position(), radius, height, material);
     }
 
-    private static Material background(double r, double g, double b) {
+    public static Material background(double r, double g, double b) {
         return new BackgroundMaterial(new Color(r, g, b));
     }
 
-    private static Material diffuse(double r, double g, double b) {
+    public static Material diffuse(double r, double g, double b) {
         return new DiffuseMaterial(new Color(r, g, b));
     }
 
-    private static Material reflective(double diffusionFactor) {
-        return new ReflectiveMaterial(new Color(0.9, 0.9, 0.9), diffusionFactor);
+    public static Material reflective(double r, double g, double b, double diffusionFactor) {
+        return new ReflectiveMaterial(new Color(r, g, b), diffusionFactor);
     }
 
-    private static Material transparent(double r, double g, double b) {
+    public static Material transparent(double r, double g, double b) {
         return new TransparentMaterial(new Color(r, g, b), 1, 1.5);
     }
 }
