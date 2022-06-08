@@ -26,6 +26,12 @@ public class Ray {
         return new Ray(source, direction, this.tmin, this.tmax);
     }
 
+    public Ray transform(Matrix sourceMatrix, Matrix directionMatrix) {
+        Point source = Matrix.multiply(sourceMatrix, this.source);
+        Direction direction = Matrix.multiply(directionMatrix, this.direction);
+        return new Ray(source, direction, this.tmin, this.tmax);
+    }
+
     public Point pointAt(double t) {
         return add(source, multiply(direction, t));
     }

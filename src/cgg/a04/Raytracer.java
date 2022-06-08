@@ -42,23 +42,4 @@ public record Raytracer(Group scene, Camera cam, Image image) implements Sampler
                     calculateRadiance(scene, properties.scatteredRay(), depth - 1)));
         }
     }
-
-    public Color calculateRadiance(Shape scene, Ray ray, int depth) {
-        // Check for maximum recursion depth
-        if (depth == 0) {
-            return new Color(0, 0, 0);
-        }
-        // Intersect ray with scene
-        Hit hit = scene.intersect(ray);
-        // Query material at hit point
-        Properties properties = hit.material().properties(ray, hit);
-        if (properties.scatteredRay() == null) {
-            // Absorbed, just emission
-            return properties.emission();
-        } else {
-            // Combine emission and reflection
-            return add(properties.emission(), multiply(properties.albedo(),
-                    calculateRadiance(scene, properties.scatteredRay(), depth - 1)));
-        }
-    }
 }

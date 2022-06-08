@@ -26,4 +26,10 @@ public record Hit(double t, Point position, Direction normal, Material material)
         Direction normal = Matrix.multiply(m, this.normal);
         return new Hit(this.t, position, normal, this.material);
     }
+
+    public Hit transform(Matrix positionMatrix, Matrix normalMatrix) {
+        Point position = Matrix.multiply(positionMatrix, this.position);
+        Direction normal = Matrix.multiply(normalMatrix, this.normal);
+        return new Hit(this.t, position, normal, this.material);
+    }
 }

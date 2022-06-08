@@ -33,7 +33,7 @@ public class Transformation {
         }
         Hit hit = h;
         for (Matrix m : matrices) {
-            hit = hit.transform(m);
+            hit = hit.transform(m, Matrix.transpose(Matrix.invert(m)));
         }
         return hit;
     }
