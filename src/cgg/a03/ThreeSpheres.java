@@ -1,5 +1,6 @@
 package cgg.a03;
 
+import cgg.a05.DiffuseMaterial;
 import cgtools.Color;
 import cgtools.Sampler;
 
@@ -17,9 +18,9 @@ public class ThreeSpheres implements Sampler {
     public ThreeSpheres(double angle) {
         this.cam = new Camera(angle, 1280, 720);
         this.spheres = new ArrayList<>();
-        spheres.add(new Sphere(point(-600, 0, -10000), 270, new Color(1, 0.4, 0.64)));
-        spheres.add(new Sphere(point(0, 0, -10000), 270, new Color(0.4, 1, 0.4)));
-        spheres.add(new Sphere(point(600, 0, -10000), 270, new Color(0.3, 0.65, 1)));
+        spheres.add(new Sphere(point(-600, 0, -10000), 270, new DiffuseMaterial(new Color(1, 0.4, 0.64))));
+        spheres.add(new Sphere(point(0, 0, -10000), 270, new DiffuseMaterial(new Color(0.4, 1, 0.4))));
+        spheres.add(new Sphere(point(600, 0, -10000), 270, new DiffuseMaterial(new Color(0.3, 0.65, 1))));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ThreeSpheres implements Sampler {
         for (Sphere s : spheres) {
             Hit hit = s.intersect(ray);
             if (hit != null) {
-                return shade(hit.normal(), hit.color());
+                return shade(hit.normal(), hit.material().properties(ray, hit).albedo());
             }
         }
         return new Color(0.05, 0.05, 0.05);

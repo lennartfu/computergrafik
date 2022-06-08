@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Image {
 
-  private final int samplePoints = 3;
+  private final int samplePoints = 100;
 
   private final int components = 3;
   private int width;
@@ -46,6 +46,7 @@ public class Image {
   }
 
   public void sample(Sampler s, boolean useStratifiedSampling) {
+    int i = 0;
     // Iterates over all pixel positions inside this image.
     for (int x = 0; x != width; x++) {
       for (int y = 0; y != height; y++) {
@@ -58,6 +59,10 @@ public class Image {
         }
         // Sets the color for one particular pixel.
         this.setPixel(x, y, color);
+      }
+      if (x % (width / 20) == 0) {
+        System.out.print(i + "%... ");
+        i += 5;
       }
     }
   }
@@ -87,5 +92,10 @@ public class Image {
   private void notYetImplemented() {
     System.err.println("Please complete the implementation of class cgg.Image as part of assignment 1.");
     System.exit(1);
+  }
+
+  public static String getFilepath(String filename) {
+    String projectDir = System.getProperty("user.dir");
+    return projectDir + "/doc/" + filename;
   }
 }
