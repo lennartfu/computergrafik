@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Image {
 
-  private final int samplePoints = 1;
+  private final int samplePoints = 100;
 
   private final int components = 3;
   private int width;
