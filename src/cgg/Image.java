@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
 
 public class Image {
 
-    public static final int samplePoints = 1;
+    public static final int samplePoints = 100;
 
     private final int components = 3;
     private int width;
@@ -53,14 +53,14 @@ public class Image {
         ImageWriter.write(filename, data, width, height);
     }
 
-    public void sample(Sampler s, boolean useStratifiedSampling) {
+    public void sample(Sampler s) {
         int threads = Runtime.getRuntime().availableProcessors();
         ExecutorService pool = Executors.newFixedThreadPool(threads);
         List<Future<Pixel>> pixels = new ArrayList<>();
         // Iterates over all pixel positions inside this image.
         for (int x = 0; x != width; x++) {
             for (int y = 0; y != height; y++) {
-                pixels.add(pool.submit(new OnePixel(s, x, y, useStratifiedSampling)));
+                pixels.add(pool.submit(new OnePixel(s, x, y)));
             }
         }
         int i = 0;
@@ -77,6 +77,7 @@ public class Image {
                 e.printStackTrace();
             }
         }
+        pool.shutdown();
     }
 
     private void notYetImplemented() {

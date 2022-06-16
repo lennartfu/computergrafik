@@ -15,7 +15,7 @@ import static cgtools.Util.shade;
 public record Raytracer(Group scene, Camera cam, Image image) implements Sampler {
 
     public void raytrace() {
-        image.sample(this, true);
+        image.sample(this);
     }
 
     @Override

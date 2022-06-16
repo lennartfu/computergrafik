@@ -53,12 +53,14 @@ public class Main {
 
     public static void createImage(Matrix matrix, Group scene, String filename) {
         System.out.println("Creating image '" + filename + "'...");
+        long start = System.nanoTime();
         Image image = new Image(1280, 720);
         Camera camera = new Camera(Math.PI / 3, 1280, 720, matrix);
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();
         image.write(Image.getFilepath(filename));
-        System.out.println("Done.");
+        long end = System.nanoTime();
+        System.out.println("Completed in " + Math.round((end - start) / 1.0e9) + " seconds.");
     }
 
     public static Sphere sphere(Matrix matrix, double x, double y, double radius, Material material) {

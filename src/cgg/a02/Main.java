@@ -10,11 +10,11 @@ public class Main {
         final int height = 270;
 
         Image discs = new Image(width, height);
-        discs.sample(new ColoredDiscs(50, width, height), false);
+        discs.sample(new ColoredDiscs(50, width, height));
         discs.write(getFilepath("a02-discs.png"));
 
         Image discsSupersampling = new Image(width, height);
-        discsSupersampling.sample(new ColoredDiscs(50, width, height), true);
+        discsSupersampling.sample(new ColoredDiscs(50, width, height));
         discsSupersampling.write(getFilepath("a02-discs-supersampling.png"));
     }
 

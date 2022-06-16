@@ -23,8 +23,9 @@ public class Main {
         Shape sky = new Background(background(1, 1, 1));
         Group scene = new Group(sky, sun(), ground(), grid());
 
-        createImage(transformation, scene, "a08-1.png");
-        createImage(transformation2, scene, "a08-2.png");
+//        createImage(transformation, scene, "a08-1.png");
+//        createImage(transformation2, scene, "a08-2.png");
+        createImage(transformation, scene, "a09-benchmark-scene.png");
     }
 
     private static Shape grid() {
