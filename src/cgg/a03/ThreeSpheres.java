@@ -24,6 +24,16 @@ public class ThreeSpheres implements Sampler {
     }
 
     @Override
+    public int width() {
+        return 0;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
+    @Override
     public Color getColor(double x, double y) {
         Ray ray = cam.generateRay(x, y);
         // Generate a ray for each sphere and check if it intersects.

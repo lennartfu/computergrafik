@@ -16,16 +16,14 @@ import java.util.concurrent.Future;
 
 public class Image {
 
-    public static final int samplePoints = 100;
+    public static final int samplePoints = 300;
+    public static final int width = 1280;
+    public static final int height = 720;
 
     private final int components = 3;
-    private int width;
-    private int height;
     private double[] data;
 
-    public Image(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Image() {
         this.data = new double[width * height * components];
     }
 

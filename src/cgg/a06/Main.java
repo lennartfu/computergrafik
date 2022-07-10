@@ -66,7 +66,7 @@ public class Main {
     }
 
     private static void createImage(Group scene, String filename) {
-        Image image = new Image(1280, 720);
+        Image image = new Image();
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();
         image.write(Image.getFilepath(filename));

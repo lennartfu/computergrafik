@@ -8,7 +8,7 @@ public class Main {
         final int width = 1280;
         final int height = 720;
 
-        Image image = new Image(width, height);
+        Image image = new Image();
         image.sample(new ThreeSpheres(0.2));
         image.write(getFilepath("a03-three-spheres.png"));
     }

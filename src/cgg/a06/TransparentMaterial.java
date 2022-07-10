@@ -1,11 +1,13 @@
 package cgg.a06;
 
+import cgg.a01.ConstantColor;
 import cgg.a03.Hit;
 import cgg.a03.Ray;
 import cgg.a05.Material;
 import cgg.a05.Properties;
 import cgtools.Color;
 import cgtools.Direction;
+import cgtools.Sampler;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,16 +19,32 @@ import static cgtools.Vector.*;
 public class TransparentMaterial implements Material {
 
     public final Color emission = new Color(0, 0, 0);
-    public final Color albedo;
+    public final Sampler albedo;
     public final double index1;
     public final double index2;
 
     private double EPSILON = 0.0001;
 
-    public TransparentMaterial(Color albedo, double index1, double index2) {
-        this.albedo = albedo;
+    public TransparentMaterial(Color color, double index1, double index2) {
+        this.albedo = new ConstantColor(color);
         this.index1 = index1;
         this.index2 = index2;
+    }
+
+    public TransparentMaterial(Sampler texture, double index1, double index2) {
+        this.albedo = texture;
+        this.index1 = index1;
+        this.index2 = index2;
+    }
+
+    @Override
+    public int width() {
+        return albedo.width();
+    }
+
+    @Override
+    public int height() {
+        return albedo.height();
     }
 
     @Override
@@ -49,7 +67,7 @@ public class TransparentMaterial implements Material {
             scattered = refract;
         } else scattered = reflect(n, d);
         Ray ray = new Ray(hit.position(), scattered, EPSILON, Double.POSITIVE_INFINITY);
-        return new Properties(ray, emission, albedo);
+        return new Properties(ray, emission, albedo.getColor(hit.u(), hit.v()));
     }
 
     public static Direction refract(Direction n, Direction d, double n1, double n2) {

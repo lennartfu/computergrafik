@@ -48,7 +48,7 @@ public class Main {
 
   private static Image createImage(int width, int height, Sampler content) {
     // Creates an image and iterates over all pixel positions inside the image.
-    Image image = new Image(width, height);
+    Image image = new Image();
     for (int x = 0; x != width; x++) {
       for (int y = 0; y != height; y++) {
         // Sets the color for one particular pixel.

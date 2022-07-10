@@ -60,10 +60,20 @@ public class Cylinder implements Shape {
         Hit h2 = null;
         // Check whether hits are valid or not.
         if ((r.isValid(t1) && isValid(p1.y()))) {
-            h1 = new Hit(t1, p1, calculateNormal(p1), material);
+            Direction normal = calculateNormal(p1);
+            double inc = Math.cos(normal.y());
+            double azi = Math.PI + Math.atan2(normal.x(), normal.z());
+            double u = azi / (2 * Math.PI);
+            double v = inc / Math.PI;
+            h1 = new Hit(t1, p1, normal, material, u, v);
         }
         if (r.isValid(t2) && isValid(p2.y())) {
-            h2 = new Hit(t2, p2, calculateNormal(p2), material);
+            Direction normal = calculateNormal(p2);
+            double inc = Math.cos(normal.y());
+            double azi = Math.PI + Math.atan2(normal.x(), normal.z());
+            double u = azi / (2 * Math.PI);
+            double v = inc / Math.PI;
+            h2 = new Hit(t2, p2, normal, material, u, v);
         }
         // Intersect ray with top and bottom caps.
         Hit h3 = bottom.intersect(r);

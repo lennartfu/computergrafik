@@ -1,5 +1,6 @@
 package cgg.a04;
 
+import cgg.Image;
 import cgg.a03.Hit;
 import cgg.a03.Ray;
 import cgg.a05.Material;
@@ -24,6 +25,8 @@ public record Plane(Point anchor, Direction normal, double radius, Material mate
         if (length(subtract(hit, anchor)) > radius) {
             return null;
         }
-        return new Hit(t, hit, normal, material);
+        double u = hit.x() / material.width() + 0.5;
+        double v = hit.z() / material.height() + 0.5;
+        return new Hit(t, hit, normal, material, u, v);
     }
 }

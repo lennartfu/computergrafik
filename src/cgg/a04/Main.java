@@ -34,7 +34,7 @@ public class Main {
         List<Shape> shapes = Arrays.asList(background, ground, globe1, globe2, globe3);
 
         Group scene = new Group(shapes);
-        Image image = new Image(1280, 720);
+        Image image = new Image();
 
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();
@@ -48,7 +48,7 @@ public class Main {
         shapes.add(stars());
         shapes.add(craters());
 
-        Image image = new Image(1280, 720);
+        Image image = new Image();
         Group scene = new Group(shapes);
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();

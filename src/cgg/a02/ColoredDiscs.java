@@ -32,6 +32,16 @@ public class ColoredDiscs implements Sampler {
     }
 
     @Override
+    public int width() {
+        return 0;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
+    @Override
     public Color getColor(double x, double y) {
         Color backgroundColor = new Color(0 , 0, 0);
         for (Disc disc: discs) {

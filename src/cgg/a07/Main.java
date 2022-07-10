@@ -52,10 +52,14 @@ public class Main {
     }
 
     public static void createImage(Matrix matrix, Group scene, String filename) {
+        Camera camera = new Camera(Math.PI / 3, 1280, 720, matrix);
+        createImage(camera, scene, filename);
+    }
+
+    public static void createImage(Camera camera, Group scene, String filename) {
         System.out.println("Creating image '" + filename + "'...");
         long start = System.nanoTime();
-        Image image = new Image(1280, 720);
-        Camera camera = new Camera(Math.PI / 3, 1280, 720, matrix);
+        Image image = new Image();
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();
         image.write(Image.getFilepath(filename));

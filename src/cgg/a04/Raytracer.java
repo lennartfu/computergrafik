@@ -19,6 +19,16 @@ public record Raytracer(Group scene, Camera cam, Image image) implements Sampler
     }
 
     @Override
+    public int width() {
+        return 0;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
+    @Override
     public Color getColor(double x, double y) {
         Ray ray = cam.generateRay(x, y);
         return calculateRadiance(scene, ray, 5);

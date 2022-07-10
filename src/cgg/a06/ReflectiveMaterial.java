@@ -1,11 +1,13 @@
 package cgg.a06;
 
+import cgg.a01.ConstantColor;
 import cgg.a03.Hit;
 import cgg.a03.Ray;
 import cgg.a05.Material;
 import cgg.a05.Properties;
 import cgtools.Color;
 import cgtools.Direction;
+import cgtools.Sampler;
 
 import static cgtools.Random.random;
 import static cgtools.Vector.*;
@@ -13,14 +15,29 @@ import static cgtools.Vector.*;
 public class ReflectiveMaterial implements Material {
 
     public final Color emission = new Color(0, 0, 0);
-    public final Color albedo;
+    public final Sampler albedo;
     public final double diffusionFactor;
 
     private double EPSILON = 0.0001;
 
-    public ReflectiveMaterial(Color albedo, double diffusionFactor) {
-        this.albedo = albedo;
+    public ReflectiveMaterial(Color color, double diffusionFactor) {
+        this.albedo = new ConstantColor(color);
         this.diffusionFactor = diffusionFactor;
+    }
+
+    public ReflectiveMaterial(Sampler texture, double diffusionFactor) {
+        this.albedo = texture;
+        this.diffusionFactor = diffusionFactor;
+    }
+
+    @Override
+    public int width() {
+        return albedo.width();
+    }
+
+    @Override
+    public int height() {
+        return albedo.height();
     }
 
     @Override
@@ -34,7 +51,7 @@ public class ReflectiveMaterial implements Material {
         Direction random = multiply(randomDirection(), diffusionFactor);
         // Generate reflected ray and return the properties of the material
         Ray scatteredRay = new Ray(hit.position(), add(reflected, random), EPSILON, Double.POSITIVE_INFINITY);
-        return new Properties(scatteredRay, emission, albedo);
+        return new Properties(scatteredRay, emission, albedo.getColor(hit.u(), hit.v()));
     }
 
     private Direction randomDirection() {

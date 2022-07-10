@@ -43,6 +43,10 @@ public record Sphere(Point center, double radius, Material material) implements 
         // Generate a hit object
         Point hit = add(r.source, multiply(t, r.direction));
         Direction normal = divide(subtract(hit, center), radius);
-        return new Hit(t, hit, normal, material);
+        double inclination = Math.acos(normal.y());
+        double azimuth = Math.PI + Math.atan2(normal.x(), normal.z());
+        double u = azimuth / (2 * Math.PI);
+        double v = inclination / Math.PI;
+        return new Hit(t, hit, normal, material, u, v);
     }
 }

@@ -30,6 +30,16 @@ public class PolkaDots implements Sampler {
         this.ygap = calculateGapSizeY();
     }
 
+    @Override
+    public int width() {
+        return 0;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
     public Color getColor(double x, double y) {
         // Create a list with the coordinates of each circles center pixel.
         List<int[]> centerPixels = getCenterPixels();

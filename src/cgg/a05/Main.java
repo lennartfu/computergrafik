@@ -39,7 +39,7 @@ public class Main {
         }
 
         Group scene = new Group(shapes);
-        Image image = new Image(1280, 720);
+        Image image = new Image();
 
         Raytracer raytracer = new Raytracer(scene, camera, image);
         raytracer.raytrace();

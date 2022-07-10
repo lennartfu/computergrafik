@@ -6,8 +6,18 @@ import cgtools.*;
 // Represents the contents of an image. Provides the same color for all pixels.
 public record ConstantColor(Color color) implements Sampler {
 
-  // Returns the color for the given position.
-  public Color getColor(double x, double y) {
+  @Override
+  public int width() {
+    return 1;
+  }
+
+  @Override
+  public int height() {
+    return 1;
+  }
+
+  @Override
+  public Color getColor(double u, double v) {
     return color;
   }
 }

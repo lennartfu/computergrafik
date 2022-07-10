@@ -19,6 +19,16 @@ public class Disc implements Sampler {
         this.yPos = yPos;
     }
 
+    @Override
+    public int width() {
+        return 0;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
     public Color getColor(double x, double y) {
         // offset x and y so that the center of the image has the coordinates (0, 0).
         x = x - xPos;
